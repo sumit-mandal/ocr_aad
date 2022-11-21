@@ -88,7 +88,7 @@ def create_alert(frame):
         if label == "aadhar":
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
-            cv2.imwrite("screen_shot/aadhar/img_aadhar_"+str(ct)+".jpg",crop_img)
+            cv2.imwrite("static/data/aadhar/img_aadhar_"+str(ct)+".jpg",crop_img)
             # time_screenshot()
 
             # take_screenshot(frame,run_video.count)
@@ -101,12 +101,12 @@ def create_alert(frame):
         if label == "pan":
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
-            cv2.imwrite("screen_shot/pan/img_pan_"+str(ct)+".jpg",crop_img)
+            cv2.imwrite("static/data/pan/img_pan_"+str(ct)+".jpg",crop_img)
 
         if label == "face":
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
-            cv2.imwrite("screen_shot/face/img_face_"+str(ct)+".jpg",crop_img)
+            cv2.imwrite("static/data/face/img_face_"+str(ct)+".jpg",crop_img)
 
     except Exception as e:
         print("_______-",e)
