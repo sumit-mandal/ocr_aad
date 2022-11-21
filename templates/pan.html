@@ -1,0 +1,25 @@
+<!DOCTYPE=html>
+<html>
+<head>
+    <title>
+        Store Report
+    </title>
+</head>
+<body>
+    <!-- {{first_event}} to {{second_event}} -->
+    {% for pan in pan_c %}
+    <img src="{{url_for('static', filename=pan)}}" alt="{{hist}}">
+    {% endfor %}
+
+    
+
+    {% for face in face_f %}
+
+    <img src="{{url_for('static', filename=face)}}" alt="{{face_f}}">
+
+    {% endfor %}
+
+
+    <p>{{name}}<p>
+</body>
+</html>

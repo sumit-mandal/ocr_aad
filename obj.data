@@ -1,0 +1,7 @@
+classes= 3
+train  = /home/sumit/Work/proxgy/OCR/Training/train.txt
+valid  = /home/sumit/Work/proxgy/OCR/Training/test.txt
+names = /home/sumit/Work/proxgy/OCR/Training/obj.names
+backup = /home/sumit/Work/proxgy/OCR/Training/backup/
+
+

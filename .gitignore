@@ -1,0 +1,9 @@
+backup/
+darknet/
+cfg/
+img_aadhar/
+img_pan/
+*.conv.137
+*.conv
+*.137
+*.weights
