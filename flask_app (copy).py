@@ -8,7 +8,7 @@ import datetime
 # import boto3
 from flask import Flask, render_template, Response
 from aadhar_pan import extract_data
-import json
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -93,7 +93,6 @@ def create_alert(frame):
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
             cv2.imwrite("static/data/aadhar/img_aadhar_"+str(ct)+".jpg",crop_img)
-            cv2.imwrite("static/data/ocr_check/img_aadhar_"+str(ct)+".jpg",crop_img)
             # time_screenshot()
 
             # take_screenshot(frame,run_video.count)
@@ -107,7 +106,7 @@ def create_alert(frame):
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
             cv2.imwrite("static/data/pan/img_pan_"+str(ct)+".jpg",crop_img)
-            cv2.imwrite("static/data/ocr_check/img_pan_"+str(ct)+".jpg",crop_img)
+
         if label == "face":
             crop_img = frame[y:y+h,x:x+w]
             # run_video.count+=1
@@ -134,17 +133,25 @@ def enter_stream_name():
 
 # @app.route('/value')
 def value():
-    f = open('info.json')
-    json_data = json.load(f)
-    # json_data = contents["ID Type"]
+    import json
+    input_file = open('info.json','r')
+    json_decode = json.load(input_file)
 
-    return json_data
+    # print(json_decode)
+    # jsonData = json_decode["Adhaar Number"]
+    # ID Type
+    return json_decode
 
 def value_pan():
-    f = open('info_pan.json')
-    json_data_pan = json.load(f)
-    # json_data_pan = contents["ID Type"]
-    return json_data_pan
+    import json
+    input_file = open('info_pan.json','r')
+    json_decode_pan = json.load(input_file)
+
+    # print(json_decode)
+    # jsonData = json_decode["Adhaar Number"]
+    # ID Type
+    return json_decode_pan
+
 
 @app.route('/extract_data/')
 def extracting_data():

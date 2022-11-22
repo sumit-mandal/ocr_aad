@@ -12,7 +12,7 @@ import json
 import io
 
 
-folder_dir = r"data"
+folder_dir = r"static/data/ocr_check"
 
 for images in os.listdir(folder_dir):
     if (images.endswith(".png") or images.endswith(".jpg") or images.endswith(".jpeg")):
@@ -55,7 +55,7 @@ resize_imgs()
 
 
 # Extract the text from the images
-path_to_images = r"data"
+path_to_images = r"static/data/ocr_check"
 output_file = r"output.txt"
 
 def convert_to_text():
@@ -274,6 +274,7 @@ def findword(textlist, wordstring):
 
 
 def extract_data():
+
     # Iterating the images inside the folder
     for imageName in os.listdir(path_to_images):
         inputPath = os.path.join(path_to_images, imageName)
@@ -286,31 +287,68 @@ def extract_data():
         if "male" in text.lower():
             print("-----------------Aadhar details-----------------------")
             data = adhaar_read_data(text)
+            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',data)
 
         elif "income" in text.lower() or "tax" in text.lower() or "department" in text.lower():
             print("-----------------Pan details------------------")
             data = pan_read_data(text)
+            print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbb',data)
+        # Write to a jSON file
+        # for i in range(4):
+        if "male" in text.lower():
+            with io.open('info'+'.json', 'w', encoding='utf-8') as outfile:
+                data = json.dumps(data, indent=4, sort_keys=True)
 
-    # Write to a jSON file
-    # for i in range(4):
-    with io.open('info'+'.json', 'w', encoding='utf-8') as outfile:
-        data = json.dumps(data, indent=4, sort_keys=True, separators=(',', ': '))
-        outfile.write(data)
+                try:
+                    outfile.write(data)
+                except:
+                    pass
 
-    # Read from the JSON file
-    with open('info'+'.json', encoding = 'utf-8') as data:
-        json_data = json.load(data)
 
-    # Extract the data from JSON file
-    if json_data['ID Type'] == 'Adhaar':
-        print("Name: ", json_data['Name'])
-        print("Date Of Birth: ", json_data['Date of Birth'])
-        print("Sex: ", json_data['Sex'])
 
-    elif json_data['ID Type'] == 'PAN':
-        print("PAN Number: ", json_data['PAN'])
-        print("Name: ", json_data['Name'])
-        print("Father's Name: ", json_data['Father Name'])
-        print("Date Of Birth: ", json_data['Date of Birth'])
+
+        if "income" in text.lower() or "tax" in text.lower() or "department" in text.lower():
+            with io.open('info_pan'+'.json', 'w', encoding='utf-8') as outfile:
+                data = json.dumps(data, indent=4, sort_keys=True)
+
+                try:
+                    outfile.write(data)
+                except:
+                    pass
+
+    #     # Read from the JSON file
+    #     with open('info'+'.json', encoding = 'utf-8') as data:
+    #         try:
+    #             json_data = json.load(data)
+    #             # print("22222",json_data)
+    #         except:
+    #             pass
+    #     # Read from the JSON file
+    #     try:
+    #         with open('info_pan'+'.json', encoding = 'utf-8') as data:
+    #             try:
+    #                 json_data_pan = json.load(data)
+    #
+    #             except:
+    #                 pass
+    #     except:
+    #         pass
+    # print("jjjjjjjjjjjjjjjjjjjjjjjjjjjjj",json_data_pan)
+    #
+    # print("data extracted")
+    # return json_data,json_data_pan
+
+
+    # # Extract the data from JSON file
+    # if json_data['ID Type'] == 'Adhaar':
+    #     print("Name: ", json_data['Name'])
+    #     print("Date Of Birth: ", json_data['Date of Birth'])
+    #     print("Sex: ", json_data['Sex'])
+    #
+    # elif json_data_pan['ID Type'] == 'PAN':
+    #     print("PAN Number: ", json_data['PAN'])
+    #     print("Name: ", json_data['Name'])
+    #     print("Father's Name: ", json_data['Father Name'])
+    #     print("Date Of Birth: ", json_data['Date of Birth'])
 
 # extract_data()
